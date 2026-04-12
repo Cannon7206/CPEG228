@@ -1,0 +1,289 @@
+MPASM 5.86                          MAIN.ASM   4-7-2026  10:25:21         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 #include "p16f84a.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Oct 24 2019
+                      00005 ;  MPASM PIC16F84A processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2019 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00209         LIST
+                      00002 
+                      00003 ; CONFIG
+                      00004 ; __config 0xFFFD
+2007   3FFD           00005  __CONFIG _FOSC_XT & _WDTE_ON & _PWRTE_OFF & _CP_OFF
+                      00006 
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00007 CBLOCK  0x20
+  00000020            00008     COUNT1
+  00000021            00009     COUNT2
+  00000022            00010     COUNT3
+  00000023            00011     COUNT4
+Warning[205]: Found directive in column 1. (ENDC)
+                      00012 ENDC
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00013 CBLOCK  0x30
+  00000030            00014     ARBG
+  00000031            00015     ARBY
+  00000032            00016     ARBR
+  00000033            00017     AGBR
+  00000034            00018     AYBR
+Warning[205]: Found directive in column 1. (ENDC)
+                      00019 ENDC
+                      00020     ORG     0x00
+0000   2???           00021     GOTO    SETUP
+                      00022     ORG     0x04
+0004   0009           00023     RETFIE
+                      00024     
+0005                  00025 SETPORT
+0005   1683           00026     BSF     STATUS, RP0 ; Switch to BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0006   0186           00027     CLRF    TRISB       ; Set Port B to output
+0007   1283           00028     BCF     STATUS, RP0 ; Switch to BANK0
+0008   0008           00029     RETURN
+                      00030 
+0009                  00031 SETUP
+0009   2???           00032     CALL    SETPORT
+                      00033     ; Designating Codes for the lights
+000A   3021           00034     MOVLW   0x21
+000B   00B3           00035     MOVWF   AGBR
+000C   3011           00036     MOVLW   0x11
+000D   00B4           00037     MOVWF   AYBR
+000E   300C           00038     MOVLW   0x0C
+MPASM 5.86                          MAIN.ASM   4-7-2026  10:25:21         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000F   00B0           00039     MOVWF   ARBG
+0010   300A           00040     MOVLW   0x0A
+0011   00B1           00041     MOVWF   ARBY
+0012   3009           00042     MOVLW   0x09
+0013   00B2           00043     MOVWF   ARBR
+                      00044     ; Move to the Main Loop
+0014   2???           00045     GOTO    MAIN
+                      00046 
+0015                  00047 DELAY
+                      00048     ; Variable Delay Function (1s-255s)
+                      00049     ; Move the amount of time wanted to be delay for
+                      00050     ; to the W register
+0015   00A0           00051     MOVWF   COUNT1
+0016                  00052 L1
+0016   303B           00053     MOVLW   D'59'
+0017   00A1           00054     MOVWF   COUNT2
+0018                  00055 L2
+0018   304A           00056     MOVLW   D'74'
+0019   00A2           00057     MOVWF   COUNT3
+001A                  00058 L3
+001A   304B           00059     MOVLW   D'75'
+001B   00A3           00060     MOVWF   COUNT4
+001C                  00061 L4
+Message[305]: Using default destination of 1 (file).
+001C   0BA3           00062     DECFSZ  COUNT4
+001D   2???           00063     GOTO    L4
+                      00064     
+Message[305]: Using default destination of 1 (file).
+001E   0BA2           00065     DECFSZ  COUNT3
+001F   2???           00066     GOTO    L3
+                      00067     
+Message[305]: Using default destination of 1 (file).
+0020   0BA1           00068     DECFSZ  COUNT2
+0021   2???           00069     GOTO    L2
+                      00070     
+Message[305]: Using default destination of 1 (file).
+0022   0BA0           00071     DECFSZ  COUNT1
+0023   2???           00072     GOTO    L1
+0024   0008           00073     RETURN
+                      00074     
+0025                  00075 MAIN
+                      00076     ; B Street Green / A Ave Red
+0025   0830           00077     MOVFW   ARBG
+0026   0086           00078     MOVWF   PORTB
+0027   301A           00079     MOVLW   D'26'
+0028   2???           00080     CALL    DELAY
+                      00081 
+                      00082     ; B Street Yellow / A Ave Red
+0029   0831           00083     MOVFW   ARBY
+002A   0086           00084     MOVWF   PORTB
+002B   3004           00085     MOVLW   D'4'
+002C   2???           00086     CALL    DELAY
+                      00087     
+MPASM 5.86                          MAIN.ASM   4-7-2026  10:25:21         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00088     ; B Street Red / A Ave Red
+002D   0832           00089     MOVFW   ARBR
+002E   0086           00090     MOVWF   PORTB
+002F   3004           00091     MOVLW   D'4'
+0030   2???           00092     CALL    DELAY
+                      00093     
+                      00094     ; B Street Red / A Ave Green
+0031   0833           00095     MOVFW   AGBR
+0032   0086           00096     MOVWF   PORTB
+0033   3038           00097     MOVLW   D'56'
+0034   2???           00098     CALL    DELAY
+                      00099 
+                      00100     ; B Street Red / A Ave Yellow
+0035   0834           00101     MOVFW   AYBR
+0036   0086           00102     MOVWF   PORTB
+0037   3004           00103     MOVLW   D'4'
+0038   2???           00104     CALL    DELAY
+                      00105     
+                      00106     ; B Street Red / A Ave Red
+0039   0832           00107     MOVFW   ARBR
+003A   0086           00108     MOVWF   PORTB
+003B   3004           00109     MOVLW   D'4'
+003C   2???           00110     CALL    DELAY
+                      00111 
+003D   2???           00112     GOTO    MAIN
+3FFD                  00113     END
+MPASM 5.86                          MAIN.ASM   4-7-2026  10:25:21         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+AGBR                              00000033
+ARBG                              00000030
+ARBR                              00000032
+ARBY                              00000031
+AYBR                              00000034
+C                                 00000000
+COUNT1                            00000020
+COUNT2                            00000021
+COUNT3                            00000022
+COUNT4                            00000023
+DC                                00000001
+DELAY                             00000015
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+L1                                00000016
+L2                                00000018
+L3                                0000001A
+L4                                0000001C
+MAIN                              00000025
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+MPASM 5.86                          MAIN.ASM   4-7-2026  10:25:21         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+SETPORT                           00000005
+SETUP                             00000009
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+MPASM 5.86                          MAIN.ASM   4-7-2026  10:25:21         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+
+Errors   :     0
+Warnings :     4 reported,     0 suppressed
+Messages :     5 reported,     0 suppressed
+
+

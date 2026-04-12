@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Page-1" id="e9uqXPtSTwULcMCtILiV">
+    <mxGraphModel dx="792" dy="561" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WakfO_VgjJTczIOnq4c7-10" edge="1" parent="1" source="WakfO_VgjJTczIOnq4c7-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="WakfO_VgjJTczIOnq4c7-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-2" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Start" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-6" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-7" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" value="" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-8" parent="1" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" value="" vertex="1">
+          <mxGeometry height="80" width="120" x="120" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-12" edge="1" parent="1" source="WakfO_VgjJTczIOnq4c7-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="280.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-9" parent="1" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" value="Read RA0" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-16" edge="1" parent="1" source="WakfO_VgjJTczIOnq4c7-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="320" />
+              <mxPoint x="490" y="140" />
+            </Array>
+            <mxPoint x="580" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-20" connectable="0" parent="WakfO_VgjJTczIOnq4c7-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="No" vertex="1">
+          <mxGeometry relative="1" x="-0.9054" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-14" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" value="RA0 = 1?" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-22" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="&lt;div&gt;End&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="120" x="520" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-23" edge="1" parent="1" source="WakfO_VgjJTczIOnq4c7-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="WakfO_VgjJTczIOnq4c7-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WakfO_VgjJTczIOnq4c7-24" connectable="0" parent="WakfO_VgjJTczIOnq4c7-23" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Yes" vertex="1">
+          <mxGeometry relative="1" x="0.03" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

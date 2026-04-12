@@ -1,0 +1,9 @@
+Warning[205] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 7 : Found directive in column 1. (CBLOCK)
+Warning[205] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 12 : Found directive in column 1. (ENDC)
+Warning[205] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 13 : Found directive in column 1. (CBLOCK)
+Warning[205] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 19 : Found directive in column 1. (ENDC)
+Message[302] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 62 : Using default destination of 1 (file).
+Message[305] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 65 : Using default destination of 1 (file).
+Message[305] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 68 : Using default destination of 1 (file).
+Message[305] C:\SCHOOL\CPEG228\LAB6\LAB6.X\MAIN.ASM 71 : Using default destination of 1 (file).
