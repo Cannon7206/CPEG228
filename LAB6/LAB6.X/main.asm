@@ -9,8 +9,6 @@ CBLOCK	0x20
     COUNT2
     COUNT3
     COUNT4
-ENDC
-CBLOCK	0x30
     ARBG
     ARBY
     ARBR
