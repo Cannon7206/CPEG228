@@ -1,4 +1,0 @@
-Message[301] C:\PROGRAM FILES (X86)\MICROCHIP\MPLABX\V5.30\MPASMX\P16F84A.INC 34 : MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
-Message[302] C:\SCHOOL\CPEG228\LAB5\LAB5.X\MAIN.ASM 20 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] C:\SCHOOL\CPEG228\LAB5\LAB5.X\MAIN.ASM 21 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[305] C:\SCHOOL\CPEG228\LAB5\LAB5.X\MAIN.ASM 89 : Using default destination of 1 (file).
