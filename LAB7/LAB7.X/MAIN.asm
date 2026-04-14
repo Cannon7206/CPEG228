@@ -22,28 +22,28 @@ SETUP
     
 SETPORT
     BSF	    STATUS, RP0
-    BCF	    TRISA, 0
-    BSF	    TRISB, 0
-    BSF	    TRISB, 1
-    BSF	    TRISB, 2
+    BSF	    TRISA, 0
+    CLRF    TRISB
     BCF	    STATUS, RP0
     RETURN
     
 MAIN
+    MOVF    PORTB, W
+    MOVWF   COUNT
     BSF	    PORTA, 0
-    CALL    DELAY_500uS
+    CALL    DELAY
     BCF	    PORTA, 0
-    CALL    DELAY_500uS	    
+    CALL    DELAY	    
     GOTO    MAIN
-
-DELAY_500uS
-    MOVLW   0x01
+    
+DELAY
+    MOVF    COUNT, W
     MOVWF   COUNT1
 L1MS
-    MOVLW   0x0B
+    MOVLW   0x05
     MOVWF   COUNT2
 L2MS
-    MOVLW   0X0A
+    MOVLW   0X0B
     MOVWF   COUNT3
 L3MS
     DECF    COUNT3, 1
@@ -58,6 +58,9 @@ L3MS
     BTFSS   STATUS, Z
     GOTO    L1MS
     
+    DECF    COUNT, 1
+    BTFSS   STATUS, Z
+    GOTO    DELAY
     RETURN
     
     END
