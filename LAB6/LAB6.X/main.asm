@@ -2,7 +2,7 @@
 
 ; CONFIG
 ; __config 0xFFFD
- __CONFIG _FOSC_XT & _WDTE_ON & _PWRTE_OFF & _CP_OFF
+ __CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
 
 CBLOCK	0x20
     COUNT1
@@ -72,37 +72,37 @@ L4
     
 MAIN
     ; B Street Green / A Ave Red
-    MOVFW   ARBG
+    MOVF    ARBG, W
     MOVWF   PORTB
-    MOVLW   D'26'
+    MOVLW   D'6'
     CALL    DELAY
-
+    
     ; B Street Yellow / A Ave Red
-    MOVFW   ARBY
+    MOVF    ARBY, W
     MOVWF   PORTB
     MOVLW   D'4'
     CALL    DELAY
     
     ; B Street Red / A Ave Red
-    MOVFW   ARBR
+    MOVF    ARBR, W
     MOVWF   PORTB
     MOVLW   D'4'
     CALL    DELAY
     
     ; B Street Red / A Ave Green
-    MOVFW   AGBR
+    MOVF    AGBR, W
     MOVWF   PORTB
-    MOVLW   D'56'
+    MOVLW   D'6'
     CALL    DELAY
 
     ; B Street Red / A Ave Yellow
-    MOVFW   AYBR
+    MOVF    AYBR, W
     MOVWF   PORTB
     MOVLW   D'4'
     CALL    DELAY
     
     ; B Street Red / A Ave Red
-    MOVFW   ARBR
+    MOVF    ARBR, W
     MOVWF   PORTB
     MOVLW   D'4'
     CALL    DELAY
