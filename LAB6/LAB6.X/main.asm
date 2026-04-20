@@ -2,7 +2,7 @@
 
 ; CONFIG
 ; __config 0xFFFD
- __CONFIG _FOSC_XT & _WDTE_ON & _PWRTE_OFF & _CP_OFF
+ __CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
 
 CBLOCK	0x20
     COUNT1
@@ -41,7 +41,46 @@ SETUP
     MOVWF   ARBR
     ; Move to the Main Loop
     GOTO    MAIN
+    
+MAIN
+    ; B Street Green / A Ave Red
+    MOVFW   ARBG
+    MOVWF   PORTB
+    MOVLW   D'12'
+    CALL    DELAY
 
+    ; B Street Yellow / A Ave Red
+    MOVFW   ARBY
+    MOVWF   PORTB
+    MOVLW   D'4'
+    CALL    DELAY
+    
+    ; B Street Red / A Ave Red
+    MOVFW   ARBR
+    MOVWF   PORTB
+    MOVLW   D'4'
+    CALL    DELAY
+    
+    ; B Street Red / A Ave Green
+    MOVFW   AGBR
+    MOVWF   PORTB
+    MOVLW   D'12'
+    CALL    DELAY
+
+    ; B Street Red / A Ave Yellow
+    MOVFW   AYBR
+    MOVWF   PORTB
+    MOVLW   D'4'
+    CALL    DELAY
+    
+    ; B Street Red / A Ave Red
+    MOVFW   ARBR
+    MOVWF   PORTB
+    MOVLW   D'4'
+    CALL    DELAY
+
+    GOTO    MAIN
+    
 DELAY
     ; Variable Delay Function (1s-255s)
     ; Move the amount of time wanted to be delay for
@@ -70,42 +109,4 @@ L4
     GOTO    L1
     RETURN
     
-MAIN
-    ; B Street Green / A Ave Red
-    MOVFW   ARBG
-    MOVWF   PORTB
-    MOVLW   D'26'
-    CALL    DELAY
-
-    ; B Street Yellow / A Ave Red
-    MOVFW   ARBY
-    MOVWF   PORTB
-    MOVLW   D'4'
-    CALL    DELAY
-    
-    ; B Street Red / A Ave Red
-    MOVFW   ARBR
-    MOVWF   PORTB
-    MOVLW   D'4'
-    CALL    DELAY
-    
-    ; B Street Red / A Ave Green
-    MOVFW   AGBR
-    MOVWF   PORTB
-    MOVLW   D'56'
-    CALL    DELAY
-
-    ; B Street Red / A Ave Yellow
-    MOVFW   AYBR
-    MOVWF   PORTB
-    MOVLW   D'4'
-    CALL    DELAY
-    
-    ; B Street Red / A Ave Red
-    MOVFW   ARBR
-    MOVWF   PORTB
-    MOVLW   D'4'
-    CALL    DELAY
-
-    GOTO    MAIN
     END
