@@ -29,6 +29,11 @@ MAINLOOP
   
 ;-------------------------------------------------------------------------------
 ;   Subrounties 
+    
+;-------------------------------------------------------------------------------
+;   Setport Subrountie
+;   Sets RA0, RA1, RA2, RA4 to output
+;   Sets RA3, RB0-7 to input
 SETPORT
     BSF	    STATUS, RP0
     CLRF    TRISA
@@ -38,6 +43,10 @@ SETPORT
     BCF	    STATUS, RP0
     RETURN
 
+    
+;-------------------------------------------------------------------------------
+;   ADC Ping Subrountie
+;   Sends a ping at RA4 to the ADC WR_n pin
 REQUEST_ADC
     BCF	    PORTA, 4
     NOP
@@ -45,15 +54,21 @@ REQUEST_ADC
     BSF	    PORTA, 4
     RETURN
 
+;-------------------------------------------------------------------------------
+;   ADC Response Subrountie
+;   Waits for a respone from the ADC intr_n pin
 WAIT_FOR_ADC
     BTFSC   PORTA, 3
     GOTO    WAIT_FOR_ADC
     RETURN
    
-
+;-------------------------------------------------------------------------------
+;   Temperature Check Subrountie
+;   Reads the entire PORTB register, then compares if the temperature is above 
+;   70°C, in between 60°C and 70°C, and below 60°C
 CHECK_TEMP
     MOVF    PORTB, W
-    ADDLW   0xDC        ; Check >= 70°F first
+    ADDLW   0xDC        ; Check >= 70°C first
     BTFSS   STATUS, C
     GOTO    CHECK_TEMP_1
     BCF     PORTA, 0
@@ -62,7 +77,7 @@ CHECK_TEMP
 
 CHECK_TEMP_1
     MOVF    PORTB, W
-    ADDLW   0xE1        ; Check >= 60°F
+    ADDLW   0xE1        ; Check >= 60°C
     BTFSS   STATUS, C
     GOTO    CHECK_TEMP_2
     BCF     PORTA, 0
@@ -70,10 +85,12 @@ CHECK_TEMP_1
     RETURN
 
 CHECK_TEMP_2
-    BSF     PORTA, 0    ; Check < 60°
+    BSF     PORTA, 0    ; Check < 60°C
     BCF     PORTA, 1
     RETURN
-    
+;-------------------------------------------------------------------------------
+;   Delay Subrountie
+;   Blocking Delay for 100ms 
 DELAY
     MOVLW   D'10'
     MOVWF   COUNT1
