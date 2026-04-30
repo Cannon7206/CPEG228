@@ -1,76 +1,57 @@
 #include "p16f84a.inc"
 ; CONFIG
 ; __config 0xFFF9
-__CONFIG _FOSC_XT & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
+__CONFIG _FOSC_HS & _WDTE_OFF & _PWRTE_OFF & _CP_OFF
 
 CBLOCK    0X10
-    COUNT
-    COUNT1
-    COUNT2
-    COUNT3
-    
+    HCYCLY
 ENDC
-    ORG        0X00
+    ORG     0X00
     GOTO    SETUP
-    ORG        0X04
+    ORG     0X04
     RETFIE
 
 SETUP
-    CALL    SETPORT
+    CALL    SETPORT 
     GOTO    MAIN
-
-SETPORT
-    BSF        STATUS, RP0
-    BCF        TRISA, 0
-    BSF        TRISB, 0
-    BSF        TRISB, 1
-    BSF        TRISB, 2
-    BCF        STATUS, RP0
-    RETURN
-
+    
 MAIN
-    MOVLW   D'1'
-    BTFSS   PORTB, 0
-    GOTO    MAIN1
-    ADDLW   D'1'
-MAIN1
-    BTFSS   PORTB, 1
-    GOTO    MAIN2
-    ADDLW   D'2'
-MAIN2
-    BTFSS   PORTB,2
-    GOTO    MAIN3
-    ADDLW   D'4'
-MAIN3
-    MOVWF   COUNT
-    BSF     PORTA, 0
+    CALL    HALT_CHECK
+    BSF	    PORTA, 0
+    MOVF    PORTB, W
     CALL    DELAY
-    BCF     PORTA, 0
-    CALL    DELAY        
+    
+    CALL    HALT_CHECK
+    BCF	    PORTA, 0
+    MOVF    PORTB, W
+    CALL    DELAY
     GOTO    MAIN
-
+    
+SETPORT
+    BSF	    STATUS, RP0
+    CLRF    TRISA
+    MOVLW   0XFF
+    MOVWF   TRISB
+    BCF	    STATUS, RP0
+    RETURN
+    
+HALT_CHECK
+    MOVF    PORTB, W
+    ADDLW   0X01
+    BTFSS   STATUS, Z
+    RETURN
+    
+    BCF	    PORTA, 0
+    GOTO    HALT_CHECK
+    
 DELAY
-    MOVF    COUNT, W
-    MOVWF   COUNT1
-L1MS
-    MOVLW   0x06       
-    MOVWF   COUNT2
-L2MS
-    MOVLW   0x09        
-    MOVWF   COUNT3
-L3MS
-    DECF    COUNT3, 1
-    BTFSS   STATUS, Z
-    GOTO    L3MS
-
-    DECF    COUNT2, 1
-    BTFSS   STATUS, Z
-    GOTO    L2MS
-
-    DECF    COUNT1, 1
-    BTFSS   STATUS, Z
-    GOTO    L1MS
-
+    MOVWF   HCYCLY
+    MOVF    HCYCLY, F
+    BTFSC   STATUS, Z
+    RETURN
+DELAY_1
+    DECFSZ  HCYCLY, F
+    GOTO    DELAY_1
     RETURN
 
     END
